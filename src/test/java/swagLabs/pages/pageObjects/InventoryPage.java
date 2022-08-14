@@ -7,10 +7,13 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import swagLabs.pages.pageComponents.HeaderComponent;
 import swagLabs.pages.pageComponents.HeaderProductsComponent;
+import swagLabs.pages.pageComponents.ItemComponent;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class InventoryPage {
@@ -18,7 +21,7 @@ public class InventoryPage {
     private final HeaderComponent header;
     private final HeaderProductsComponent headerProducts;
     private final WebElement inventoryList;
-    private final List<WebElement> inventoryListItems;
+    private List<ItemComponent> items;
 
     public InventoryPage(WebDriver driver) {
         this.driver = driver;
@@ -29,9 +32,18 @@ public class InventoryPage {
         this.header = new HeaderComponent(driver);
         this.headerProducts = new HeaderProductsComponent(driver);
         this.inventoryList = driver.findElement(By.cssSelector("div.inventory_list"));
-        this.inventoryListItems = inventoryList.findElements(By.cssSelector("div.inventory_item"));
+        this.items = getItems();
 
         assertTrue(inventoryList.isEnabled());
-        assertTrue(inventoryListItems.get(0).isDisplayed());
+        assertFalse(items.isEmpty());
+    }
+
+    public List<ItemComponent> getItems() {
+        List<WebElement> tmp = inventoryList.findElements(By.cssSelector("div.inventory_item"));
+        this.items = new ArrayList<>();
+        for (int i = 0; i < tmp.size(); i++) {
+            items.add(new ItemComponent(driver, tmp.get(i)));
+        }
+        return items;
     }
 }
