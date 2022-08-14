@@ -7,7 +7,9 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import swagLabs.helpers.DataHelper;
-import swagLabs.pages.MainPage;
+import swagLabs.pages.pageObjects.MainPage;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class UITests {
     private WebDriver driver;
@@ -34,8 +36,19 @@ public class UITests {
     public void shouldLoginAsSuccessful() {
         driver.get("https://www.saucedemo.com/");
         var mainPage = new MainPage(driver);
-        var user = DataHelper.getStandardUser();
+        var user = DataHelper.getStandardValidUser();
 
-        var inventoryPage = mainPage.assertSuccessLogin(user.getLogin(), user.getPassword());
+        var inventoryPage = mainPage.assertSuccessfulLogin(user.getLogin(), user.getPassword());
+    }
+
+    @Test
+    public void shouldNotificationAboutEmptyUsername() {
+        driver.get("https://www.saucedemo.com/");
+        var mainPage = new MainPage(driver);
+        var user = DataHelper.getStandardValidUser();
+
+        mainPage.assertFailingLogin("", user.getPassword());
+        assertEquals("Epic sadface: Username is required", mainPage.getTextFromErrorNotification());
+        mainPage.closingErrorNotification();
     }
 }

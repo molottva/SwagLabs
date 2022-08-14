@@ -1,4 +1,4 @@
-package swagLabs.pages;
+package swagLabs.pages.pageComponents;
 
 import org.openqa.selenium.WebDriver;
 

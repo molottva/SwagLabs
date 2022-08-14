@@ -9,7 +9,7 @@ public class DataHelper {
         private final String password;
     }
 
-    public static UserLoginData getStandardUser() {
+    public static UserLoginData getStandardValidUser() {
         return new UserLoginData("standard_user", "secret_sauce");
     }
 }
