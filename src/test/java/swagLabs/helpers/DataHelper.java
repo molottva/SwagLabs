@@ -1,6 +1,8 @@
 package swagLabs.helpers;
 
 import lombok.Value;
+import org.openqa.selenium.WebElement;
+import swagLabs.pages.pageComponents.ItemComponent;
 
 public class DataHelper {
     @Value
@@ -23,5 +25,16 @@ public class DataHelper {
 
     public static UserLoginData getPerformanceGlitchUser() {
         return new UserLoginData("performance_glitch_user", "secret_sauce");
+    }
+
+    @Value
+    public static class ItemData {
+        private final String itemName;
+        private final String itemDescription;
+        private final float itemPrice;
+    }
+
+    public static ItemData getItemData (ItemComponent item) {
+        return new ItemData(item.getItemName(), item.getItemDescription(), item.getItemPrice());
     }
 }

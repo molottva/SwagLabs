@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ItemComponent {
@@ -36,5 +37,20 @@ public class ItemComponent {
         assertTrue(itemDescription.isDisplayed());
         assertTrue(itemPrice.isDisplayed());
         assertTrue(itemAddToCartButton.isDisplayed());
+
+        assertEquals(itemName.getText(), itemImage.getAttribute("alt"));
+    }
+
+    public String getItemName() {
+        return itemName.getText();
+    }
+
+    public String getItemDescription() {
+        return itemDescription.getText();
+    }
+
+    public float getItemPrice() {
+        String tmp = itemPrice.getText().substring(1);
+        return Float.valueOf(tmp);
     }
 }
