@@ -23,8 +23,8 @@ public class InventoryPage {
     public InventoryPage(WebDriver driver) {
         this.driver = driver;
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        //todo переделать проверку с url на более правильную
-        assertTrue(wait.until(ExpectedConditions.urlContains("https://www.saucedemo.com/inventory")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div#root")));
+        assertTrue(driver.getCurrentUrl().contains("https://www.saucedemo.com/inventory"));
 
         this.header = new HeaderComponent(driver);
         this.headerProducts = new HeaderProductsComponent(driver);
@@ -32,6 +32,6 @@ public class InventoryPage {
         this.inventoryListItems = inventoryList.findElements(By.cssSelector("div.inventory_item"));
 
         assertTrue(inventoryList.isEnabled());
-        assertTrue(inventoryList.isEnabled());
+        assertTrue(inventoryListItems.get(0).isDisplayed());
     }
 }
