@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import swagLabs.pages.pageComponents.HeaderComponent;
-import swagLabs.pages.pageComponents.HeaderProductsComponent;
+import swagLabs.pages.pageComponents.SortProductComponent;
 import swagLabs.pages.pageComponents.ItemComponent;
 
 import java.time.Duration;
@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class InventoryPage {
     private final WebDriver driver;
     private final HeaderComponent header;
-    private final HeaderProductsComponent headerProducts;
+    private final SortProductComponent sortProductComponent;
     private final WebElement inventoryList;
     private List<ItemComponent> items;
 
@@ -30,7 +30,7 @@ public class InventoryPage {
         assertTrue(driver.getCurrentUrl().contains("https://www.saucedemo.com/inventory"));
 
         this.header = new HeaderComponent(driver);
-        this.headerProducts = new HeaderProductsComponent(driver);
+        this.sortProductComponent = new SortProductComponent(driver);
         this.inventoryList = driver.findElement(By.cssSelector("div.inventory_list"));
         this.items = getItems();
 

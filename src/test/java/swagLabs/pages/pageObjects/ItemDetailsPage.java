@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import swagLabs.pages.pageComponents.HeaderComponent;
-import swagLabs.pages.pageComponents.HeaderProductsComponent;
+import swagLabs.pages.pageComponents.SortProductComponent;
 
 import java.time.Duration;
 
@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class ItemDetailsPage {
     private final WebDriver driver;
     private final HeaderComponent header;
-    private final HeaderProductsComponent headerProducts;
+    private final WebElement backToProductsButton;
     private final WebElement itemDetails;
     private final WebElement itemDetailsImage;
     private final WebElement itemDetailsName;
@@ -31,7 +31,7 @@ public class ItemDetailsPage {
         assertTrue(driver.getCurrentUrl().contains("https://www.saucedemo.com/inventory-item"));
 
         this.header = new HeaderComponent(driver);
-        this.headerProducts = new HeaderProductsComponent(driver);
+        this.backToProductsButton = driver.findElement(By.cssSelector("button#back-to-products"));
         this.itemDetails = driver.findElement(By.cssSelector("div.inventory_details"));
         this.itemDetailsImage = itemDetails.findElement(By.cssSelector("img.inventory_details_img"));
         this.itemDetailsName = itemDetails.findElement(By.cssSelector("div.inventory_details_name"));
