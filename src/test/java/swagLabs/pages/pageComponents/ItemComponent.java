@@ -41,6 +41,10 @@ public class ItemComponent {
         assertEquals(itemName.getText(), itemImage.getAttribute("alt"));
     }
 
+    public String getItemImageSrc() {
+        return itemImage.getAttribute("src");
+    }
+
     public String getItemName() {
         return itemName.getText();
     }
@@ -49,8 +53,7 @@ public class ItemComponent {
         return itemDescription.getText();
     }
 
-    public float getItemPrice() {
-        String tmp = itemPrice.getText().substring(1);
-        return Float.valueOf(tmp);
+    public String getItemPrice() {
+        return itemPrice.getText();
     }
 }

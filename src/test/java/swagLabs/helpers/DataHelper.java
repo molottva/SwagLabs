@@ -29,12 +29,17 @@ public class DataHelper {
 
     @Value
     public static class ItemData {
+        private final String itemImageSrc;
         private final String itemName;
         private final String itemDescription;
-        private final float itemPrice;
+        private final int itemPriceInCents;
     }
 
-    public static ItemData getItemData (ItemComponent item) {
-        return new ItemData(item.getItemName(), item.getItemDescription(), item.getItemPrice());
+    public static ItemData getItemData(ItemComponent item) {
+        return new ItemData(item.getItemImageSrc(), item.getItemName(), item.getItemDescription(), convertItemPriceInCents(item));
+    }
+
+    public static int convertItemPriceInCents(ItemComponent item) {
+        return Math.round(Float.valueOf(item.getItemPrice().substring(1)) * 100);
     }
 }
