@@ -2,6 +2,7 @@ package swagLabs.helpers;
 
 import lombok.Value;
 import swagLabs.pages.pageComponents.ItemComponent;
+import swagLabs.pages.pageObjects.ItemDetailsPage;
 
 public class DataHelper {
     @Value
@@ -38,7 +39,16 @@ public class DataHelper {
         return new ItemData(item.getItemImageSrc(), item.getItemName(), item.getItemDescription(), convertItemPriceInCents(item));
     }
 
+    public static ItemData getItemData(ItemDetailsPage item) {
+        return new ItemData(item.getItemImageSrc(), item.getItemDetailsName(), item.getItemDetailsDescription(),
+                convertItemPriceInCents(item));
+    }
+
     public static int convertItemPriceInCents(ItemComponent item) {
         return Math.round(Float.valueOf(item.getItemPrice().substring(1)) * 100);
+    }
+
+    public static int convertItemPriceInCents(ItemDetailsPage item) {
+        return Math.round(Float.valueOf(item.getItemDetailsPrice().substring(1)) * 100);
     }
 }
