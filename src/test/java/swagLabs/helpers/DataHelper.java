@@ -1,7 +1,6 @@
 package swagLabs.helpers;
 
 import lombok.Value;
-import org.openqa.selenium.WebElement;
 import swagLabs.pages.pageComponents.ItemComponent;
 
 public class DataHelper {
