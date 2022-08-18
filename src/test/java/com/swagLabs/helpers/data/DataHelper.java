@@ -1,8 +1,8 @@
-package swagLabs.helpers.data;
+package com.swagLabs.helpers.data;
 
+import com.swagLabs.pages.interfacePages.ItemInterface;
+import com.swagLabs.pages.pageComponents.ItemComponent;
 import lombok.Value;
-import swagLabs.pages.interfacePages.ItemInterface;
-import swagLabs.pages.pageComponents.ItemComponent;
 
 import java.util.ArrayList;
 import java.util.List;

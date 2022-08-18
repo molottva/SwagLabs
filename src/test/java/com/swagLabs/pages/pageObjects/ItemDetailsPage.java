@@ -1,14 +1,14 @@
-package swagLabs.pages.pageObjects;
+package com.swagLabs.pages.pageObjects;
 
+import com.swagLabs.pages.pageComponents.HeaderComponent;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import swagLabs.pages.basePage.DefaultSettingsPage;
-import swagLabs.pages.interfacePages.ItemInterface;
-import swagLabs.pages.pageComponents.HeaderComponent;
+import com.swagLabs.pages.basePage.DefaultSettingsPage;
+import com.swagLabs.pages.interfacePages.ItemInterface;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -39,7 +39,7 @@ public class ItemDetailsPage extends DefaultSettingsPage implements ItemInterfac
         this.header = new HeaderComponent(driver);
     }
 
-    public void assertItemDetailsPageIsLoad() {
+    public ItemDetailsPage assertItemDetailsPageIsLoad() {
         assertTrue(itemImage.isDisplayed());
         assertTrue(itemName.isDisplayed());
         assertTrue(itemDescription.isDisplayed());
@@ -48,7 +48,9 @@ public class ItemDetailsPage extends DefaultSettingsPage implements ItemInterfac
 
         assertTrue(driver.getCurrentUrl().contains("https://www.saucedemo.com/inventory-item"));
         assertEquals(itemName.getText(), itemImage.getAttribute("alt"));
-        //todo проверка на значения аттрибутов у названия и изображения
+        assertEquals("inventory_details_name large_size", itemName.getAttribute("class"));
+        assertEquals("inventory_details_desc large_size", itemDescription.getAttribute("class"));
+        return this;
     }
 
     public String getItemImageSrc() {

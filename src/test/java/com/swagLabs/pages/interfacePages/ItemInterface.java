@@ -1,4 +1,4 @@
-package swagLabs.pages.interfacePages;
+package com.swagLabs.pages.interfacePages;
 
 public interface ItemInterface {
     String getItemImageSrc();

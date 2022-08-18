@@ -1,5 +1,8 @@
-package swagLabs.pages.pageObjects;
+package com.swagLabs.pages.pageObjects;
 
+import com.swagLabs.pages.pageComponents.HeaderComponent;
+import com.swagLabs.pages.pageComponents.ItemComponent;
+import com.swagLabs.pages.pageComponents.SortProductComponent;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -7,10 +10,7 @@ import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import swagLabs.pages.basePage.DefaultSettingsPage;
-import swagLabs.pages.pageComponents.HeaderComponent;
-import swagLabs.pages.pageComponents.ItemComponent;
-import swagLabs.pages.pageComponents.SortProductComponent;
+import com.swagLabs.pages.basePage.DefaultSettingsPage;
 
 import java.util.List;
 

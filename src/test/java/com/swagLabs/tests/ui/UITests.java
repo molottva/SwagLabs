@@ -1,8 +1,8 @@
-package swagLabs.tests.ui;
+package com.swagLabs.tests.ui;
 
 import org.junit.jupiter.api.Test;
-import swagLabs.helpers.data.DataHelper;
-import swagLabs.pages.pageObjects.MainPage;
+import com.swagLabs.helpers.data.DataHelper;
+import com.swagLabs.pages.pageObjects.MainPage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

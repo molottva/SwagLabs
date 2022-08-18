@@ -1,4 +1,4 @@
-package swagLabs.tests.ui;
+package com.swagLabs.tests.ui;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;

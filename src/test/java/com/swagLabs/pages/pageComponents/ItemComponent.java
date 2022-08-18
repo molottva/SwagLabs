@@ -1,13 +1,14 @@
-package swagLabs.pages.pageComponents;
+package com.swagLabs.pages.pageComponents;
 
+import com.swagLabs.pages.pageObjects.ItemDetailsPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import swagLabs.pages.basePage.DefaultSettingsPage;
-import swagLabs.pages.interfacePages.ItemInterface;
+import com.swagLabs.pages.basePage.DefaultSettingsPage;
+import com.swagLabs.pages.interfacePages.ItemInterface;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -38,7 +39,8 @@ public class ItemComponent extends DefaultSettingsPage implements ItemInterface 
         assertTrue(itemAddToCartButton.isDisplayed());
 
         assertEquals(itemName.getText(), itemImage.getAttribute("alt"));
-        //todo проверка на значения аттрибутов у названия и изображения
+        assertEquals("inventory_item_name", itemName.getAttribute("class"));
+        assertEquals("inventory_item_desc", itemName.getAttribute("class"));
     }
 
     public String getItemImageSrc() {
@@ -56,4 +58,19 @@ public class ItemComponent extends DefaultSettingsPage implements ItemInterface 
     public String getItemPrice() {
         return itemPrice.getText();
     }
+
+    public ItemComponent addToCartClick() {
+        itemAddToCartButton.click();
+        return this;
+    }
+
+    public ItemComponent assertConditionAddToCartButton(String expectedText) {
+        assertTrue(itemAddToCartButton.getText().equalsIgnoreCase(expectedText));
+        return this;
+    }
+
+    //todo сделать две метода по переходу в корзину по клику на картинку и название товара
+//    public ItemDetailsPage clickToItemsDetailsPage(int index) {
+//
+//    }
 }
