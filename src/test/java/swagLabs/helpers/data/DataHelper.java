@@ -1,8 +1,11 @@
-package swagLabs.helpers;
+package swagLabs.helpers.data;
 
 import lombok.Value;
+import swagLabs.pages.interfacePages.ItemInterface;
 import swagLabs.pages.pageComponents.ItemComponent;
-import swagLabs.pages.pageObjects.ItemDetailsPage;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DataHelper {
     @Value
@@ -35,20 +38,20 @@ public class DataHelper {
         private final int itemPriceInCents;
     }
 
-    public static ItemData getItemData(ItemComponent item) {
-        return new ItemData(item.getItemImageSrc(), item.getItemName(), item.getItemDescription(), convertItemPriceInCents(item));
-    }
-
-    public static ItemData getItemData(ItemDetailsPage item) {
-        return new ItemData(item.getItemImageSrc(), item.getItemDetailsName(), item.getItemDetailsDescription(),
+    public static ItemData getItemData(ItemInterface item) {
+        return new ItemData(item.getItemImageSrc(), item.getItemName(), item.getItemDescription(),
                 convertItemPriceInCents(item));
     }
 
-    public static int convertItemPriceInCents(ItemComponent item) {
+    public static int convertItemPriceInCents(ItemInterface item) {
         return Math.round(Float.valueOf(item.getItemPrice().substring(1)) * 100);
     }
 
-    public static int convertItemPriceInCents(ItemDetailsPage item) {
-        return Math.round(Float.valueOf(item.getItemDetailsPrice().substring(1)) * 100);
+    public static List<ItemData> getListItemsData(List<ItemComponent> items) {
+        List<ItemData> listItemsData = new ArrayList<>();
+        for (int i = 0; i < items.size(); i++) {
+            listItemsData.add(getItemData(items.get(i)));
+        }
+        return listItemsData;
     }
 }

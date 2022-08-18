@@ -3,36 +3,39 @@ package swagLabs.pages.pageObjects;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import swagLabs.pages.basePage.DefaultSettingsPage;
 
-import java.time.Duration;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-public class MainPage {
-    private final WebDriver driver;
-    private final WebElement loginForm;
-    private final WebElement usernameInput;
-    private final WebElement passwordInput;
-    private final WebElement loginButton;
-
-    private final WebElement errorContainer;
+public class MainPage extends DefaultSettingsPage {
+    @FindBy(css = "div[id='login_button_container']")
+    private WebElement loginForm;
+    @FindBy(css = "input[id='user-name']")
+    private WebElement usernameInput;
+    @FindBy(css = "input[id='password']")
+    private WebElement passwordInput;
+    @FindBy(css = "input[data-test='login-button']")
+    private WebElement loginButton;
+    @FindBy(css = "div.error-message-container")
+    private WebElement errorContainer;
+    @FindBy(css = "h3[data-test='error']")
     private WebElement errorNotification;
+    @FindBy(css = "button.error-button")
     private WebElement errorButton;
 
     public MainPage(WebDriver driver) {
-        this.driver = driver;
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div#root")));
+        super(driver);
+        PageFactory.initElements(driver, this);
+        defaultWait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div#root")));
+    }
+
+    public MainPage assertPageIsLoad() {
         assertEquals("https://www.saucedemo.com/", driver.getCurrentUrl());
         assertEquals("Swag Labs", driver.getTitle());
-
-        this.loginForm = driver.findElement(By.cssSelector("div[id='login_button_container']"));
-        this.usernameInput = loginForm.findElement(By.cssSelector("input[id='user-name']"));
-        this.passwordInput = loginForm.findElement(By.cssSelector("input[id='password']"));
-        this.loginButton = loginForm.findElement(By.cssSelector("input[data-test='login-button']"));
-        this.errorContainer = loginForm.findElement(By.cssSelector("div.error-message-container"));
 
         assertTrue(loginForm.isDisplayed());
         assertTrue(usernameInput.isDisplayed());
@@ -42,20 +45,22 @@ public class MainPage {
         assertEquals("input_error form_input", usernameInput.getAttribute("class"));
         assertEquals("input_error form_input", passwordInput.getAttribute("class"));
         assertEquals("error-message-container", errorContainer.getAttribute("class"));
+        return this;
     }
 
-    public void inputLoginForm(String login, String password) {
+    public MainPage inputLoginForm(String login, String password) {
         usernameInput.sendKeys(login);
         passwordInput.sendKeys(password);
         loginButton.click();
+        return this;
     }
 
-    public InventoryPage assertSuccessfulLogin(String login, String password) {
+    public InventoryPage assertLoginIsSuccessful(String login, String password) {
         inputLoginForm(login, password);
         return new InventoryPage(driver);
     }
 
-    public void assertFailingLogin(String login, String password) {
+    public MainPage assertLoginIsFailing(String login, String password) {
         inputLoginForm(login, password);
 
         assertEquals("input_error form_input error", usernameInput.getAttribute("class"));
@@ -64,17 +69,19 @@ public class MainPage {
 
         errorNotification = loginForm.findElement(By.cssSelector("h3[data-test='error']"));
         errorButton = errorNotification.findElement(By.cssSelector("button.error-button"));
+        return this;
     }
 
     public String getTextFromErrorNotification() {
         return errorNotification.getText();
     }
 
-    public void closingErrorNotification() {
+    public MainPage closingErrorNotification() {
         errorButton.click();
 
         assertEquals("input_error form_input", usernameInput.getAttribute("class"));
         assertEquals("input_error form_input", passwordInput.getAttribute("class"));
         assertEquals("error-message-container", errorContainer.getAttribute("class"));
+        return this;
     }
 }

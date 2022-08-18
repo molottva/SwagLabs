@@ -3,64 +3,67 @@ package swagLabs.pages.pageObjects;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import swagLabs.pages.basePage.DefaultSettingsPage;
+import swagLabs.pages.interfacePages.ItemInterface;
 import swagLabs.pages.pageComponents.HeaderComponent;
-import swagLabs.pages.pageComponents.SortProductComponent;
-
-import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class ItemDetailsPage {
-    private final WebDriver driver;
-    private final HeaderComponent header;
-    private final WebElement backToProductsButton;
-    private final WebElement itemDetails;
-    private final WebElement itemDetailsImage;
-    private final WebElement itemDetailsName;
-    private final WebElement itemDetailsDescription;
-    private final WebElement itemDetailsPrice;
-    private final WebElement itemAddToCartButton;
+public class ItemDetailsPage extends DefaultSettingsPage implements ItemInterface {
+    private HeaderComponent header;
+    @FindBy(css = "button#back-to-products")
+    private WebElement backToProductsButton;
+    @FindBy(css = "div.inventory_details")
+    private WebElement item;
+    @FindBy(css = "img.inventory_details_img")
+    private WebElement itemImage;
+    @FindBy(css = "div.inventory_details_name")
+    private WebElement itemName;
+    @FindBy(css = "div.inventory_details_desc")
+    private WebElement itemDescription;
+    @FindBy(css = "div.inventory_details_price")
+    private WebElement itemPrice;
+    @FindBy(css = "button.btn")
+    private WebElement itemAddToCartButton;
 
     public ItemDetailsPage(WebDriver driver) {
+        super(driver);
+        PageFactory.initElements(driver, this);
+        defaultWait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.inventory_details")));
+
         this.driver = driver;
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.inventory_details")));
-        assertTrue(driver.getCurrentUrl().contains("https://www.saucedemo.com/inventory-item"));
-
         this.header = new HeaderComponent(driver);
-        this.backToProductsButton = driver.findElement(By.cssSelector("button#back-to-products"));
-        this.itemDetails = driver.findElement(By.cssSelector("div.inventory_details"));
-        this.itemDetailsImage = itemDetails.findElement(By.cssSelector("img.inventory_details_img"));
-        this.itemDetailsName = itemDetails.findElement(By.cssSelector("div.inventory_details_name"));
-        this.itemDetailsDescription = itemDetails.findElement(By.cssSelector("div.inventory_details_desc"));
-        this.itemDetailsPrice = itemDetails.findElement(By.cssSelector("div.inventory_details_price"));
-        this.itemAddToCartButton = itemDetails.findElement(By.cssSelector("button.btn"));
+    }
 
-        assertTrue(itemDetailsImage.isDisplayed());
-        assertTrue(itemDetailsName.isDisplayed());
-        assertTrue(itemDetailsDescription.isDisplayed());
-        assertTrue(itemDetailsPrice.isDisplayed());
+    public void assertItemDetailsPageIsLoad() {
+        assertTrue(itemImage.isDisplayed());
+        assertTrue(itemName.isDisplayed());
+        assertTrue(itemDescription.isDisplayed());
+        assertTrue(itemPrice.isDisplayed());
         assertTrue(itemAddToCartButton.isDisplayed());
 
-        assertEquals(itemDetailsName.getText(), itemDetailsImage.getAttribute("alt"));
+        assertTrue(driver.getCurrentUrl().contains("https://www.saucedemo.com/inventory-item"));
+        assertEquals(itemName.getText(), itemImage.getAttribute("alt"));
+        //todo проверка на значения аттрибутов у названия и изображения
     }
 
     public String getItemImageSrc() {
-        return itemDetailsImage.getAttribute("src");
+        return itemImage.getAttribute("src");
     }
 
-    public String getItemDetailsName() {
-        return itemDetailsName.getText();
+    public String getItemName() {
+        return itemName.getText();
     }
 
-    public String getItemDetailsDescription() {
-        return itemDetailsDescription.getText();
+    public String getItemDescription() {
+        return itemDescription.getText();
     }
 
-    public String getItemDetailsPrice() {
-        return itemDetailsPrice.getText();
+    public String getItemPrice() {
+        return itemPrice.getText();
     }
 }
