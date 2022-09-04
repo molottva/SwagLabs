@@ -1,4 +1,4 @@
-package com.swagLabs.pages.basePage;
+package com.swagLabs.pages.generalPages.basePage;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;

@@ -8,14 +8,16 @@ import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import com.swagLabs.pages.basePage.DefaultSettingsPage;
+import com.swagLabs.pages.generalPages.basePage.DefaultSettingsPage;
+import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class SortProductComponent extends DefaultSettingsPage {
-    @FindBy(css = "select.select_container")
+    @FindBy(css = "select.product_sort_container")
     private WebElement sortContainer;
     @FindAll(@FindBy(css = "select[data-test='product_sort_container'] option"))
     private List<WebElement> sortOptions;
@@ -32,14 +34,13 @@ public class SortProductComponent extends DefaultSettingsPage {
         assertFalse(sortOptions.get(sortOptions.size() - 1).isDisplayed());
     }
 
-    public void selectSortOption(String option) throws UnknownSortOptionException {
-        for (WebElement sortOption : sortOptions) {
-            if (sortOption.getText().equalsIgnoreCase(option)) {
-                sortOption.click();
-                assertEquals(option, sortContainer.findElement(By.cssSelector("span.active_option")).getText());
-                return;
-            }
+    public void selectSortOption(String value) throws UnknownSortOptionException {
+        try {
+            Select select = new Select(sortContainer);
+            select.selectByValue(value);
+        } catch (NoSuchElementException e) {
+            e.printStackTrace();
+            throw new UnknownSortOptionException("Неизвестный параметр сортировки: " + value);
         }
-        throw new UnknownSortOptionException("Неизвестный параметр сортировки: " + option);
     }
 }

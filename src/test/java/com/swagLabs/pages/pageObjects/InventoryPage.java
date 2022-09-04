@@ -1,7 +1,6 @@
 package com.swagLabs.pages.pageObjects;
 
 import com.swagLabs.pages.pageComponents.HeaderComponent;
-import com.swagLabs.pages.pageComponents.ItemComponent;
 import com.swagLabs.pages.pageComponents.SortProductComponent;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -10,7 +9,7 @@ import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import com.swagLabs.pages.basePage.DefaultSettingsPage;
+import com.swagLabs.pages.generalPages.basePage.DefaultSettingsPage;
 
 import java.util.List;
 
@@ -22,8 +21,8 @@ public class InventoryPage extends DefaultSettingsPage {
     private SortProductComponent sortProductComponent;
     @FindBy(css = "div.inventory_list")
     private WebElement inventoryList;
-    @FindAll(@FindBy (css = "div.inventory_item"))
-    private List<ItemComponent> items;
+    @FindAll(@FindBy(css = "div.inventory_item"))
+    private List<WebElement> items;
 
     public InventoryPage(WebDriver driver) {
         super(driver);
@@ -36,9 +35,12 @@ public class InventoryPage extends DefaultSettingsPage {
 
     public InventoryPage assertInventoryPageIsLoad() {
         assertTrue(driver.getCurrentUrl().contains("https://www.saucedemo.com/inventory"));
-
         assertTrue(inventoryList.isEnabled());
         assertFalse(items.isEmpty());
+        header.assertHeaderComponentIsLoad();
+
+        items.get(0).isDisplayed();
+        items.get(items.size() - 1).isDisplayed();
         return this;
     }
 }

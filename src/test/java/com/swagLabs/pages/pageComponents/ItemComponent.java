@@ -1,5 +1,7 @@
 package com.swagLabs.pages.pageComponents;
 
+import com.swagLabs.pages.generalPages.basePage.DefaultSettingsPage;
+import com.swagLabs.pages.generalPages.interfacePages.ItemInterface;
 import com.swagLabs.pages.pageObjects.ItemDetailsPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -7,8 +9,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import com.swagLabs.pages.basePage.DefaultSettingsPage;
-import com.swagLabs.pages.interfacePages.ItemInterface;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -69,8 +69,13 @@ public class ItemComponent extends DefaultSettingsPage implements ItemInterface 
         return this;
     }
 
-    //todo сделать две метода по переходу в корзину по клику на картинку и название товара
-//    public ItemDetailsPage clickToItemsDetailsPage(int index) {
-//
-//    }
+    public ItemDetailsPage clickToItemsDetailsPageByImage() {
+        itemImage.click();
+        return new ItemDetailsPage(driver);
+    }
+
+    public ItemDetailsPage clickToItemsDetailsPageByName() {
+        itemName.click();
+        return new ItemDetailsPage(driver);
+    }
 }

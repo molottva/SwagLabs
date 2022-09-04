@@ -1,8 +1,8 @@
 package com.swagLabs.tests.ui;
 
-import org.junit.jupiter.api.Test;
 import com.swagLabs.helpers.data.DataHelper;
 import com.swagLabs.pages.pageObjects.MainPage;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -14,7 +14,8 @@ public class UITests extends DefaultSettingsUITest {
         var mainPage = new MainPage(driver);
 
         mainPage.assertPageIsLoad()
-                .assertLoginIsSuccessful(user.getLogin(), user.getPassword());
+                .assertLoginIsSuccessful(user.getLogin(), user.getPassword())
+                .assertInventoryPageIsLoad();
     }
 
     @Test

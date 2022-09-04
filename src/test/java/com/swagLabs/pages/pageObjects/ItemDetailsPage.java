@@ -7,8 +7,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import com.swagLabs.pages.basePage.DefaultSettingsPage;
-import com.swagLabs.pages.interfacePages.ItemInterface;
+import com.swagLabs.pages.generalPages.basePage.DefaultSettingsPage;
+import com.swagLabs.pages.generalPages.interfacePages.ItemInterface;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -50,6 +50,8 @@ public class ItemDetailsPage extends DefaultSettingsPage implements ItemInterfac
         assertEquals(itemName.getText(), itemImage.getAttribute("alt"));
         assertEquals("inventory_details_name large_size", itemName.getAttribute("class"));
         assertEquals("inventory_details_desc large_size", itemDescription.getAttribute("class"));
+
+        header.assertHeaderComponentIsLoad();
         return this;
     }
 

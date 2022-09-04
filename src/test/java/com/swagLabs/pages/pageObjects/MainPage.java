@@ -6,12 +6,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import com.swagLabs.pages.basePage.DefaultSettingsPage;
+import com.swagLabs.pages.generalPages.basePage.DefaultSettingsPage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MainPage extends DefaultSettingsPage {
+    @FindBy(css = "div.login_logo")
+    private WebElement logo;
     @FindBy(css = "div[id='login_button_container']")
     private WebElement loginForm;
     @FindBy(css = "input[id='user-name']")
@@ -37,6 +39,7 @@ public class MainPage extends DefaultSettingsPage {
         assertEquals("https://www.saucedemo.com/", driver.getCurrentUrl());
         assertEquals("Swag Labs", driver.getTitle());
 
+        assertTrue(logo.isDisplayed());
         assertTrue(loginForm.isDisplayed());
         assertTrue(usernameInput.isDisplayed());
         assertTrue(passwordInput.isDisplayed());

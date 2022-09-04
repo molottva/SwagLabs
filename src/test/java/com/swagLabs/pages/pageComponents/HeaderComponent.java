@@ -8,7 +8,7 @@ import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import com.swagLabs.pages.basePage.DefaultSettingsPage;
+import com.swagLabs.pages.generalPages.basePage.DefaultSettingsPage;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ public class HeaderComponent extends DefaultSettingsPage {
     @FindBy(css = "div.app_logo")
     private WebElement logo;
     @FindBy(css = "button#react-burger-menu-btn")
-    private WebElement menuContainerButton;
+    private WebElement menuNavbarButton;
     @FindAll(@FindBy(css = "nav.bm-item-list a"))
     private List<WebElement> menuItems;
     @FindBy(css = "button#react-burger-cross-btn")
@@ -34,7 +34,7 @@ public class HeaderComponent extends DefaultSettingsPage {
 
     public HeaderComponent assertHeaderComponentIsLoad() {
         assertTrue(logo.isDisplayed());
-        assertTrue(menuContainerButton.isDisplayed());
+        assertTrue(menuNavbarButton.isDisplayed());
         assertTrue(cartButton.isDisplayed());
 
         assertFalse(menuItems.get(0).isDisplayed());
@@ -42,9 +42,14 @@ public class HeaderComponent extends DefaultSettingsPage {
         assertFalse(menuCloseButton.isDisplayed());
         return this;
     }
-    //todo навигация в меню слева
+
     public CartPage clickToCartPage() {
         cartButton.click();
         return new CartPage(driver);
+    }
+
+    public NavbarComponent clickToNavbarComponent() {
+        menuNavbarButton.click();
+        return new NavbarComponent(driver);
     }
 }

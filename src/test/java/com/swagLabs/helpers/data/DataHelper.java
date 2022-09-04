@@ -1,7 +1,6 @@
 package com.swagLabs.helpers.data;
 
-import com.swagLabs.pages.interfacePages.ItemInterface;
-import com.swagLabs.pages.pageComponents.ItemComponent;
+import com.swagLabs.pages.generalPages.interfacePages.ItemInterface;
 import lombok.Value;
 
 import java.util.ArrayList;
@@ -47,7 +46,7 @@ public class DataHelper {
         return Math.round(Float.valueOf(item.getItemPrice().substring(1)) * 100);
     }
 
-    public static List<ItemData> getListItemsData(List<ItemComponent> items) {
+    public static List<ItemData> getListItemsData(List<ItemInterface> items) {
         List<ItemData> listItemsData = new ArrayList<>();
         for (int i = 0; i < items.size(); i++) {
             listItemsData.add(getItemData(items.get(i)));

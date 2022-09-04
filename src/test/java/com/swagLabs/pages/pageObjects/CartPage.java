@@ -1,6 +1,6 @@
 package com.swagLabs.pages.pageObjects;
 
-import com.swagLabs.pages.basePage.DefaultSettingsPage;
+import com.swagLabs.pages.generalPages.basePage.DefaultSettingsPage;
 import org.openqa.selenium.WebDriver;
 
 //todo class

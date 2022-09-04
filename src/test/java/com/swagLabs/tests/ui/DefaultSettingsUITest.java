@@ -17,7 +17,6 @@ public class DefaultSettingsUITest {
     @BeforeEach
     public void setUpBeforeMethod() {
         this.driver = new ChromeDriver();
-        System.out.println("ss");
     }
 
     @AfterEach
