@@ -70,8 +70,8 @@ public class MainPage extends DefaultSettingsPage {
         assertEquals("input_error form_input error", passwordInput.getAttribute("class"));
         assertEquals("error-message-container error", errorContainer.getAttribute("class"));
 
-        errorNotification = loginForm.findElement(By.cssSelector("h3[data-test='error']"));
-        errorButton = errorNotification.findElement(By.cssSelector("button.error-button"));
+        assertTrue(errorNotification.isDisplayed());
+        assertTrue(errorButton.isDisplayed());
         return this;
     }
 

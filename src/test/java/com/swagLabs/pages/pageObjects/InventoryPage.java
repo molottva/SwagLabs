@@ -1,6 +1,7 @@
 package com.swagLabs.pages.pageObjects;
 
 import com.swagLabs.pages.pageComponents.HeaderComponent;
+import com.swagLabs.pages.pageComponents.NavbarComponent;
 import com.swagLabs.pages.pageComponents.SortProductComponent;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -18,6 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class InventoryPage extends DefaultSettingsPage {
     private HeaderComponent header;
+    private NavbarComponent navbarComponent;
     private SortProductComponent sortProductComponent;
     @FindBy(css = "div.inventory_list")
     private WebElement inventoryList;
@@ -30,6 +32,7 @@ public class InventoryPage extends DefaultSettingsPage {
         defaultWait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div#root")));
 
         this.header = new HeaderComponent(this.driver);
+        this.navbarComponent = new NavbarComponent(this.driver);
         this.sortProductComponent = new SortProductComponent(this.driver);
     }
 

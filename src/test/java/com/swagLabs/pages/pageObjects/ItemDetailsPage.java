@@ -1,6 +1,7 @@
 package com.swagLabs.pages.pageObjects;
 
 import com.swagLabs.pages.pageComponents.HeaderComponent;
+import com.swagLabs.pages.pageComponents.NavbarComponent;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ItemDetailsPage extends DefaultSettingsPage implements ItemInterface {
     private HeaderComponent header;
+    private NavbarComponent navbarComponent;
     @FindBy(css = "button#back-to-products")
     private WebElement backToProductsButton;
     @FindBy(css = "div.inventory_details")
@@ -35,8 +37,8 @@ public class ItemDetailsPage extends DefaultSettingsPage implements ItemInterfac
         PageFactory.initElements(driver, this);
         defaultWait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.inventory_details")));
 
-        this.driver = driver;
         this.header = new HeaderComponent(driver);
+        this.navbarComponent = new NavbarComponent(driver);
     }
 
     public ItemDetailsPage assertItemDetailsPageIsLoad() {
